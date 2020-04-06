@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Time;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class CopyFileTaskThread implements Task, Runnable{
@@ -59,16 +60,21 @@ public class CopyFileTaskThread implements Task, Runnable{
         }
     }
 
-    public static void main(String[] args){
-        try {
-            CopyFileTaskThread test = new CopyFileTaskThread(Paths.get("test.txt"), Paths.get("test4.txt"));
-            test.start();
-            System.out.println(test.getPercentProgress());
-            TimeUnit.MILLISECONDS.sleep(30);
-            System.out.println(test.getPercentProgress());
-            test.interrupt();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+    public static void main(String[] args) throws IOException {
+        CopyFileTaskThread test = new CopyFileTaskThread(Paths.get("Shlee_M_-_Qt_5_10_Professionalnoe_programmirovanie_na_C.pdf"), Paths.get("test4.txt"));
+        test.start();
+        System.out.println("Start");
+        while(true){
+            String cmd = new Scanner(System.in).nextLine();
+            if("i".equalsIgnoreCase(cmd)){
+                test.interrupt();
+                System.out.println("Процентов скопированно: " + test.getPercentProgress() + "%");
+                break;
+            }else if("p".equalsIgnoreCase(cmd)){
+                System.out.println("Процентов скопированно: " + test.getPercentProgress() + "%");
+            }else if("q".equalsIgnoreCase(cmd)){
+                break;
+            }
         }
     }
 }
