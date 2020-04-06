@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class TerminateThread implements Runnable {
-    private Thread thread;
+        private Thread thread;
 
     public TerminateThread() {
         thread = new Thread(this, "TerminateThread");
